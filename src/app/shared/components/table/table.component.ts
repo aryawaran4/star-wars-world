@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-table',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'

@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GetResponse } from '../../type/swapi.type';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SwapiService {
-  private apiRoot: string = `${process.env['SWAPI_ROOT_URL']}`;
+  private apiRoot: string = environment.swapiRootUrl;
 
   constructor(private http: HttpClient) { }
 
