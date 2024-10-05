@@ -1,0 +1,19 @@
+<div class="flex justify-center space-x-2">
+  <button
+    [disabled]="currentPage === 1"
+    (click)="changePage(currentPage - 1)"
+    class="border px-4 py-2"
+  >
+    Previous
+  </button>
+
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+
+  <button
+    [disabled]="currentPage === totalPages"
+    (click)="changePage(currentPage + 1)"
+    class="border px-4 py-2"
+  >
+    Next
+  </button>
+</div>

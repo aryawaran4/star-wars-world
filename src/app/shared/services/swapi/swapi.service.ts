@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { GetResponse, People, Planet, Film, Species, Starship, Vehicle } from '../../type/swapi.type';
+import { GetResponse } from '../../type/swapi.type';
 
 @Injectable({
   providedIn: 'root',
