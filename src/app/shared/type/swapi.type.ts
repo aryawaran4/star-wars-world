@@ -109,7 +109,6 @@ export interface Starship {
   url: string;
 }
 
-
 export interface GetResponse<T = any[]> {
   count: number;
   next: string | null;

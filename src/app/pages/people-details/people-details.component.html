@@ -1,1 +1,183 @@
 <app-background-star></app-background-star>
+
+<div
+  *ngIf="!isLoading; else loading"
+  class="mx-auto grid h-screen grid-cols-1 gap-6 p-6 lg:grid-cols-3"
+>
+  <!-- People Info (Top Left, Large Card) -->
+  <div
+    class="col-span-1 h-full overflow-y-auto rounded-lg bg-gray-800 bg-opacity-60 p-6 shadow-lg lg:col-span-2"
+  >
+    <ng-container *ngIf="people; else noDataTemplate">
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <div class="col-span-2 flex items-center justify-center">
+          <h1 class="text-left text-5xl font-bold text-white lg:text-center lg:text-7xl">
+            {{ people.name }}
+          </h1>
+        </div>
+
+        <!-- Right Side: Data Details -->
+        <div class="col-span-1 text-gray-300">
+          <h2 class="text-2xl font-semibold text-white">Data Details</h2>
+          <div class="mt-4 space-y-2">
+            <p>
+              <strong>Height:</strong>
+              {{ people.height || '-' }} cm
+            </p>
+            <p>
+              <strong>Mass:</strong>
+              {{ people.mass || '-' }} kg
+            </p>
+            <p>
+              <strong>Hair Color:</strong>
+              {{ people.hair_color || '-' }}
+            </p>
+            <p>
+              <strong>Skin Color:</strong>
+              {{ people.skin_color || '-' }}
+            </p>
+            <p>
+              <strong>Eye Color:</strong>
+              {{ people.eye_color || '-' }}
+            </p>
+            <p>
+              <strong>Birth Year:</strong>
+              {{ people.birth_year || '-' }}
+            </p>
+            <p>
+              <strong>Gender:</strong>
+              {{ people.gender || '-' }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Species Details -->
+      <h2 class="mb-4 mt-6 text-2xl font-semibold text-white">Species Details</h2>
+      <ng-container *ngIf="species.length > 0; else loadingSpeciesOrNoData">
+        <div class="mt-2 space-y-2 text-gray-300">
+          <div *ngFor="let species of species" class="mt-2">
+            <p>
+              The {{ species.name || 'Unknown Species' }} is classified as a
+              {{ species.classification || 'mysterious' }} creature. Known for its
+              {{ species.designation || 'unique' }} status, this species typically has an average
+              height of {{ species.average_height || 'unknown' }} cm. With skin colors ranging from
+              {{ species.skin_colors || 'varied' }}, and hair colors that can be described as
+              {{ species.hair_colors || 'diverse' }}, their appearance can greatly vary among
+              individuals. The average lifespan of a {{ species.name || 'species' }} is
+              approximately {{ species.average_lifespan || 'unknown' }} years, adding to the
+              intrigue of its existence. Originating from
+              {{ species.homeworld || 'an unknown planet' }}, they communicate in the
+              {{ species.language || 'language unknown' }}, and are often featured in various films,
+              further illustrating their cultural significance.
+            </p>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #loadingSpeciesOrNoData>
+        <ng-container *ngIf="loadingState.species; else noDataTemplate">
+          <div class="flex h-full w-full items-center justify-center text-white">Loading...</div>
+        </ng-container>
+      </ng-template>
+    </ng-container>
+  </div>
+
+  <ng-template #noDataTemplate>
+    <div class="text-gray-400">No data available.</div>
+  </ng-template>
+
+  <!-- Homeworld and Films (Top Right, Stacked Vertically, Fills Space) -->
+  <div class="flex h-full flex-col space-y-6">
+    <!-- Homeworld Card -->
+    <div class="flex-1 overflow-y-auto rounded-lg bg-gray-800 bg-opacity-60 p-6 shadow-lg">
+      <ng-container *ngIf="homeworld; else loadingHomeworldOrNoData">
+        <h2 class="text-2xl font-semibold text-white">Homeworld</h2>
+        <div class="mt-2 text-gray-300">
+          <p>Name: {{ homeworld.name }}</p>
+          <p>Climate: {{ homeworld.climate }}</p>
+          <p>Terrain: {{ homeworld.terrain }}</p>
+        </div>
+      </ng-container>
+      <ng-template #loadingHomeworldOrNoData>
+        <ng-container *ngIf="loadingState.homeworld; else noDataTemplate">
+          <div class="flex h-full w-full items-center justify-center text-white">Loading...</div>
+        </ng-container>
+      </ng-template>
+    </div>
+
+    <!-- Films Card -->
+    <div class="flex-1 overflow-y-auto rounded-lg bg-gray-800 bg-opacity-60 p-6 shadow-lg">
+      <ng-container *ngIf="films.length > 0; else loadingFilmsOrNoData">
+        <h2 class="text-2xl font-semibold text-white">Films</h2>
+        <ul class="mt-2 text-gray-300">
+          <li *ngFor="let film of films">{{ film.title }} ({{ film.release_date }})</li>
+        </ul>
+      </ng-container>
+      <ng-template #loadingFilmsOrNoData>
+        <ng-container *ngIf="loadingState.films; else noDataTemplate">
+          <div class="flex h-full w-full items-center justify-center text-white">Loading...</div>
+        </ng-container>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Vehicles, Starships, and Back Button (Bottom) -->
+  <div
+    class="col-span-1 flex flex-col space-y-6 lg:col-span-3 lg:flex-row lg:space-x-6 lg:space-y-0"
+  >
+    <!-- Vehicles Card -->
+    <div class="flex-1 overflow-y-auto rounded-lg bg-gray-800 bg-opacity-60 p-6 shadow-lg">
+      <ng-container *ngIf="vehicles.length > 0; else loadingVehiclesOrNoData">
+        <h2 class="text-2xl font-semibold text-white">Vehicles</h2>
+        <ul class="mt-2 text-gray-300">
+          <li *ngFor="let vehicle of vehicles">{{ vehicle.name }}</li>
+        </ul>
+      </ng-container>
+      <ng-template #loadingVehiclesOrNoData>
+        <ng-container *ngIf="loadingState.vehicles; else noDataTemplate">
+          <div class="flex h-full w-full items-center justify-center text-white">Loading...</div>
+        </ng-container>
+      </ng-template>
+    </div>
+
+    <!-- Starships Card -->
+    <div class="flex-1 overflow-y-auto rounded-lg bg-gray-800 bg-opacity-60 p-6 shadow-lg">
+      <ng-container *ngIf="starships.length > 0; else loadingStarshipsOrNoData">
+        <h2 class="text-2xl font-semibold text-white">Starships</h2>
+        <ul class="mt-2 text-gray-300">
+          <li *ngFor="let starship of starships">{{ starship.name }}</li>
+        </ul>
+      </ng-container>
+      <ng-template #loadingStarshipsOrNoData>
+        <ng-container *ngIf="loadingState.starships; else noDataTemplate">
+          <div class="flex h-full w-full items-center justify-center text-white">Loading...</div>
+        </ng-container>
+      </ng-template>
+    </div>
+
+    <!-- Back Button -->
+    <div
+      class="flex flex-1 items-center justify-center rounded-lg bg-gray-800 bg-opacity-60 p-6 shadow-lg"
+    >
+      <button
+        (click)="goBack()"
+        class="w-full rounded-lg bg-gray-800 px-4 py-3 font-semibold text-white hover:bg-gray-700"
+      >
+        Back to Homepage
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Global Loading Spinner -->
+<ng-template #loading>
+  <div class="flex h-screen w-full items-center justify-center">
+    <app-spinner></app-spinner>
+  </div>
+</ng-template>
+
+<!-- No Data Available Template -->
+<ng-template #noDataTemplate>
+  <div class="text-gray-400">No data available.</div>
+</ng-template>

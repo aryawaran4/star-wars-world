@@ -27,7 +27,11 @@ export class SwapiService {
   }
 
 
-  getEntityById<T>(entity: string, id: number, pageNumber?: number): Observable<T> {
+  getEntityById<T>(entity: string, id: string): Observable<T> {
     return this._http.get<T>(`${this.apiRoot}${entity}/${id}`);
+  }
+
+  getEntityByIdDirect<T>(url: string): Observable<T> {
+    return this._http.get<T>(url);
   }
 }
