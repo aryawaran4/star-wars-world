@@ -1,10 +1,11 @@
 <app-background-star></app-background-star>
 <div class="relative flex h-screen w-full items-center justify-center">
   <div class="absolute flex flex-col items-center justify-center">
-    <img src="assets/svg/logo-star-wars.svg" alt="" />
+    <img src="assets/svg/logo-star-wars.svg" alt="logo-star-wars" fadeUpAnimation />
     <button
       (click)="scrollToStarsData()"
       class="group relative grid overflow-hidden rounded-full px-6 py-2 shadow-[0_1000px_0_0_hsl(0_0%_20%)_inset] transition-colors duration-200"
+      fadeUpAnimation
     >
       <span>
         <span
@@ -20,14 +21,16 @@
 </div>
 
 <div class="mx-auto w-4/5 py-24">
-  <app-quotes></app-quotes>
+  <div fadeUpAnimation>
+    <app-quotes></app-quotes>
+  </div>
 </div>
 
-<div class="mx-auto w-4/5 py-24 mt-24" id="stars-data">
+<div class="mx-auto mt-36 w-4/5 pb-24 pt-8" id="stars-data">
   <div class="mb-12">
-    <h2 class="text-center text-6xl font-semibold text-white">Stars Database</h2>
+    <h2 class="text-center text-6xl font-semibold text-white" fadeUpAnimation>Stars Database</h2>
   </div>
-  <div class="flex flex-col gap-12">
+  <div class="flex flex-col gap-12" fadeUpAnimation>
     <app-search (search)="onSearch($event)"></app-search>
 
     <app-table

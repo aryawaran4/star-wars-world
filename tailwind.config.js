@@ -13,6 +13,7 @@ module.exports = {
         'twinkle-5': 'twinkle5 9s infinite',
         flip: "flip 6s infinite steps(2, end)",
         rotate: "rotate 3s linear infinite both",
+        'fade-up': 'fade-up 1s ease-out forwards',
       },
       keyframes: {
         twinkle1: {
@@ -45,6 +46,10 @@ module.exports = {
             transform: "rotate(90deg)",
           },
         },
+        'fade-up': {
+          '0%': { opacity: '0', transform: 'translateY(50px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        }
       },
     },
   },

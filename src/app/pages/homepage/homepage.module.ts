@@ -6,6 +6,7 @@ import { SearchComponent } from '../../shared/components/search/search.component
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 import { BackgroundStarComponent } from '../../shared/ui/background-star/background-star.component';
 import { QuotesComponent } from '../../shared/components/quotes/quotes.component';
+import { FadeUpAnimationDirective } from '../../shared/ui/fadeUpAnimation/fade-up-animation.directive';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { QuotesComponent } from '../../shared/components/quotes/quotes.component
     TableComponent,
     PaginationComponent,
     BackgroundStarComponent,
-    QuotesComponent
+    QuotesComponent,
+    FadeUpAnimationDirective
   ]
 })
 export class HomepageModule { }

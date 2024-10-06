@@ -10,7 +10,7 @@ import { environment } from '../../../../environments/environment';
 export class SwapiService {
   private apiRoot: string = environment.swapiRootUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private _http: HttpClient) { }
 
   getEntities<T>(entity: string, pageNumber: number, search: string): Observable<GetResponse<T[]>> {
     const params: any = {
@@ -23,7 +23,7 @@ export class SwapiService {
 
     const queryString = new URLSearchParams(params).toString();
 
-    return this.http.get<GetResponse<T[]>>(`${this.apiRoot}${entity}/?${queryString}`);
+    return this._http.get<GetResponse<T[]>>(`${this.apiRoot}${entity}/?${queryString}`);
   }
 
 
@@ -32,6 +32,6 @@ export class SwapiService {
     if (pageNumber) {
       page = pageNumber
     }
-    return this.http.get<T>(`${this.apiRoot}${entity}/${id}//?page=${page}`);
+    return this._http.get<T>(`${this.apiRoot}${entity}/${id}//?page=${page}`);
   }
 }

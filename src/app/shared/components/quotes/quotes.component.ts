@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-quotes',
@@ -32,10 +32,14 @@ export class QuotesComponent {
 
   currentQuote: { character: string, quote: string } = { character: '', quote: '' };
 
-  constructor() { }
+  constructor(
+    @Inject(PLATFORM_ID) private _platformId: Object,
+  ) { }
 
   ngOnInit(): void {
-    this.getRandomQuote();
+    if (isPlatformBrowser(this._platformId)) {
+      this.getRandomQuote();
+    }
   }
 
   getRandomQuote(): void {

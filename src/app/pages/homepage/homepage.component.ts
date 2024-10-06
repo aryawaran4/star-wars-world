@@ -1,6 +1,7 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { People } from '../../shared/type/swapi.type';
 import { SwapiService } from '../../shared/services/swapi/swapi.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-homepage',
@@ -23,11 +24,14 @@ export class HomepageComponent implements OnInit {
   isLoading: boolean = false; // Loading state
 
   constructor(
-    private swapiService: SwapiService,
-    private renderer: Renderer2) { }
+    private _swapiService: SwapiService,
+    @Inject(PLATFORM_ID) private _platformId: Object
+  ) { }
 
   ngOnInit(): void {
-    this.loadPeople();
+    if (isPlatformBrowser(this._platformId)) {
+      this.loadPeople();
+    }
   }
 
   scrollToStarsData(): void {
@@ -39,7 +43,7 @@ export class HomepageComponent implements OnInit {
 
   loadPeople(page: number = this.currentPage): void {
     this.isLoading = true; // Set loading state to true
-    this.swapiService.getEntities<People>('people', page, this.searchTerm).subscribe((response) => {
+    this._swapiService.getEntities<People>('people', page, this.searchTerm).subscribe((response) => {
       this.peoples = response.results;
       this.totalItems = response.count;
       this.isLoading = false; // Set loading state to false
