@@ -22,7 +22,11 @@
           </thead>
           <tbody>
             <ng-container *ngIf="data.length > 0; else noData">
-              <tr *ngFor="let item of data" class="cursor-pointer hover:bg-gray-700">
+              <tr
+                *ngFor="let item of data"
+                (click)="onRowClick(item)"
+                class="cursor-pointer hover:bg-gray-700"
+              >
                 <td
                   *ngFor="let header of headers"
                   class="border-b border-white border-opacity-20 px-4 py-2 text-white w-1/{{

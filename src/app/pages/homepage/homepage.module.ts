@@ -8,6 +8,8 @@ import { BackgroundStarComponent } from '../../shared/ui/background-star/backgro
 import { QuotesComponent } from '../../shared/components/quotes/quotes.component';
 import { FadeUpAnimationDirective } from '../../shared/ui/fadeUpAnimation/fade-up-animation.directive';
 
+
+
 @NgModule({
   declarations: [
     HomepageComponent,

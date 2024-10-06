@@ -28,10 +28,6 @@ export class SwapiService {
 
 
   getEntityById<T>(entity: string, id: number, pageNumber?: number): Observable<T> {
-    let page = 1
-    if (pageNumber) {
-      page = pageNumber
-    }
-    return this._http.get<T>(`${this.apiRoot}${entity}/${id}//?page=${page}`);
+    return this._http.get<T>(`${this.apiRoot}${entity}/${id}`);
   }
 }

@@ -39,6 +39,7 @@
       [currentPage]="currentPage"
       [itemsPerPage]="itemsPerPage"
       [isLoading]="isLoading"
+      (rowClicked)="onRowClick($event)"
     ></app-table>
 
     <app-pagination
@@ -46,6 +47,7 @@
       [totalItems]="totalItems"
       [itemsPerPage]="itemsPerPage"
       (pageChange)="onPageChange($event)"
+      [isLoading]="isLoading"
     ></app-pagination>
   </div>
 </div>

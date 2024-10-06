@@ -2,6 +2,7 @@ import { Component, Inject, OnInit, PLATFORM_ID, Renderer2 } from '@angular/core
 import { People } from '../../shared/type/swapi.type';
 import { SwapiService } from '../../shared/services/swapi/swapi.service';
 import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -20,12 +21,13 @@ export class HomepageComponent implements OnInit {
   itemsPerPage: number = 10;
   totalItems: number = 0;
   searchTerm: string = '';
-  private searchTimeout: any; // Variable to hold the timeout ID
-  isLoading: boolean = false; // Loading state
+  private searchTimeout: any;
+  isLoading: boolean = false;
 
   constructor(
     private _swapiService: SwapiService,
-    @Inject(PLATFORM_ID) private _platformId: Object
+    @Inject(PLATFORM_ID) private _platformId: Object,
+    private _router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -42,11 +44,11 @@ export class HomepageComponent implements OnInit {
   }
 
   loadPeople(page: number = this.currentPage): void {
-    this.isLoading = true; // Set loading state to true
+    this.isLoading = true;
     this._swapiService.getEntities<People>('people', page, this.searchTerm).subscribe((response) => {
       this.peoples = response.results;
       this.totalItems = response.count;
-      this.isLoading = false; // Set loading state to false
+      this.isLoading = false;
     });
   }
 
@@ -57,19 +59,30 @@ export class HomepageComponent implements OnInit {
 
     this.searchTimeout = setTimeout(() => {
       this.searchTerm = term;
-      this.currentPage = 1; // Reset to the first page
-      this.loadPeople(); // Reload people based on the new search term
+      this.currentPage = 1;
+      this.loadPeople();
     }, 700);
   }
 
   onPageChange(page: number) {
     this.currentPage = page;
-    this.loadPeople(page); // Fetch data for the selected page
+    this.loadPeople(page);
   }
 
   onItemsPerPageChange(itemsPerPage: number) {
     this.itemsPerPage = itemsPerPage;
-    this.currentPage = 1; // Reset to the first page
-    this.loadPeople(); // Reload people based on the new items per page
+    this.currentPage = 1;
+    this.loadPeople();
   }
+
+  onRowClick(item: People): void {
+    if (item.url) {
+      const urlSegments = item.url.split('/');
+      const id = urlSegments[urlSegments.length - 2];
+      this._router.navigate(['/people', id]);
+    } else {
+      console.error('URL is undefined for item:', item);
+    }
+  }
+
 }
