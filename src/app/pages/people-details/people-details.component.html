@@ -1,6 +1,6 @@
 <app-background-star></app-background-star>
 
-<div *ngIf="!isLoading; else loading" class="mx-auto grid gap-6 p-6 lg:grid-cols-3">
+<div *ngIf="!isLoading; else loading" class="mx-auto grid gap-6 p-6 lg:h-screen lg:grid-cols-3">
   <!-- People Info (Top Left, Large Card) -->
   <div
     class="col-span-1 h-fit overflow-y-auto rounded-lg bg-gray-800 bg-opacity-60 p-6 shadow-lg lg:col-span-2 lg:min-h-full"
@@ -80,7 +80,7 @@
   </div>
 
   <!-- Homeworld and Films (Top Right, Stacked Vertically, Fills Space) -->
-  <div class="flex flex-col space-y-6">
+  <div class="flex flex-col space-y-6 lg:row-span-1">
     <!-- Homeworld Card -->
     <div class="flex-1 overflow-y-auto rounded-lg bg-gray-800 bg-opacity-60 p-6 shadow-lg">
       <ng-container *ngIf="homeworld; else loadingHomeworldOrNoData">
@@ -116,10 +116,12 @@
 
   <!-- Vehicles, Starships, and Back Button (Bottom) -->
   <div
-    class="col-span-1 flex flex-col space-y-6 lg:col-span-3 lg:flex-row lg:space-x-6 lg:space-y-0"
+    class="col-span-1 flex flex-col space-y-6 lg:col-span-3 lg:h-full lg:flex-row lg:space-x-6 lg:space-y-0"
   >
     <!-- Vehicles Card -->
-    <div class="flex-1 overflow-y-auto rounded-lg bg-gray-800 bg-opacity-60 p-6 shadow-lg">
+    <div
+      class="h-full flex-1 overflow-y-auto rounded-lg bg-gray-800 bg-opacity-60 p-6 shadow-lg lg:min-h-0 lg:flex-1"
+    >
       <ng-container *ngIf="vehicles.length > 0; else loadingVehiclesOrNoData">
         <h2 class="text-2xl font-semibold text-white">Vehicles</h2>
         <ul class="mt-2 text-gray-300">
@@ -134,7 +136,9 @@
     </div>
 
     <!-- Starships Card -->
-    <div class="flex-1 overflow-y-auto rounded-lg bg-gray-800 bg-opacity-60 p-6 shadow-lg">
+    <div
+      class="h-full flex-1 overflow-y-auto rounded-lg bg-gray-800 bg-opacity-60 p-6 shadow-lg lg:min-h-0 lg:flex-1"
+    >
       <ng-container *ngIf="starships.length > 0; else loadingStarshipsOrNoData">
         <h2 class="text-2xl font-semibold text-white">Starships</h2>
         <ul class="mt-2 text-gray-300">
