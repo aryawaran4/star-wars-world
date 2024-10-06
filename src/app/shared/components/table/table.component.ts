@@ -16,7 +16,7 @@ import { SpinnerComponent } from '../../ui/spinner/spinner.component'; // Import
 })
 export class TableComponent {
   @Input() data: any[] = [];
-  @Input() headers: string[] = [];
+  @Input() headers: { name: string, key: string }[] = [];
   @Input() currentPage: number = 1;
   @Input() itemsPerPage: number = 10;
   @Input() isLoading: boolean = false; // Add loading state

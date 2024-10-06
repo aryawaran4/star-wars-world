@@ -1,38 +1,48 @@
-<div>
+<div class="flex h-full min-h-[465px] w-full items-center justify-center">
   <div *ngIf="isLoading; else dataTable">
-    <app-spinner></app-spinner>
-    <!-- Show spinner when loading -->
+    <div>
+      <app-spinner></app-spinner>
+    </div>
   </div>
   <ng-template #dataTable>
-    <div class="relative overflow-hidden rounded-lg bg-black bg-opacity-50">
-      <table class="w-full table-auto">
-        <thead>
-          <tr>
-            <th *ngFor="let header of headers" class="bg-transparent px-4 py-2 text-white">
-              {{ header | titlecase }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngIf="data.length > 0; else noData">
-            <tr *ngFor="let item of data">
-              <td
-                *ngFor="let key of headers"
-                class="border-b border-white border-opacity-20 bg-transparent px-4 py-2 text-white hover:bg-gray-700"
-              >
-                {{ item[key] }}
-              </td>
-            </tr>
-          </ng-container>
-          <ng-template #noData>
+    <div class="h-full min-h-[465px] w-full">
+      <div class="relative w-full overflow-auto rounded-lg bg-black bg-opacity-50">
+        <table class="w-full table-fixed">
+          <thead class="sticky top-0 bg-black bg-opacity-70">
             <tr>
-              <td [attr.colspan]="headers.length" class="py-4 text-center text-gray-400">
-                No data available
-              </td>
+              <th
+                *ngFor="let header of headers"
+                class="border-b border-white border-opacity-20 px-4 py-4 text-left text-white w-1/{{
+                  headers.length
+                }}"
+              >
+                {{ header.name }}
+              </th>
             </tr>
-          </ng-template>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="data.length > 0; else noData">
+              <tr *ngFor="let item of data" class="cursor-pointer hover:bg-gray-700">
+                <td
+                  *ngFor="let header of headers"
+                  class="border-b border-white border-opacity-20 px-4 py-2 text-white w-1/{{
+                    headers.length
+                  }}"
+                >
+                  {{ item[header.key] }}
+                </td>
+              </tr>
+            </ng-container>
+            <ng-template #noData>
+              <tr>
+                <td [attr.colspan]="headers.length" class="py-4 text-center text-gray-400">
+                  No data available
+                </td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+      </div>
     </div>
   </ng-template>
 </div>

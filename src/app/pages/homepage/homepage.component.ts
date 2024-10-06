@@ -9,7 +9,12 @@ import { SwapiService } from '../../shared/services/swapi/swapi.service';
 })
 export class HomepageComponent implements OnInit {
   peoples: People[] = [];
-  headers: string[] = ['name', 'gender', 'height'];
+  headers: { name: string; key: string; }[] = [
+    { name: 'Name', key: 'name' },
+    { name: 'Gender', key: 'gender' },
+    { name: 'Birth Year', key: 'birth_year' },
+    { name: 'Height (Cm)', key: 'height' }
+  ];
   currentPage: number = 1;
   itemsPerPage: number = 10;
   totalItems: number = 0;
