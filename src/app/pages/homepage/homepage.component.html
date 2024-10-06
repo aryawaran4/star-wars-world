@@ -19,11 +19,15 @@
   </div>
 </div>
 
-<div class="mx-auto w-4/5" id="stars-data">
+<div class="mx-auto w-4/5 py-24">
+  <app-quotes></app-quotes>
+</div>
+
+<div class="mx-auto w-4/5 py-24 mt-24" id="stars-data">
   <div class="mb-12">
     <h2 class="text-center text-6xl font-semibold text-white">Stars Database</h2>
   </div>
-  <div>
+  <div class="flex flex-col gap-12">
     <app-search (search)="onSearch($event)"></app-search>
 
     <app-table
