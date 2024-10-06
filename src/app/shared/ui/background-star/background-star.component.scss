@@ -1,0 +1,16 @@
+.bg-template {
+  position: fixed;
+  /* Fixes the background to the viewport */
+  top: 0;
+  /* Aligns to the top of the viewport */
+  left: 0;
+  /* Aligns to the left of the viewport */
+  width: 100vw;
+  /* Takes full width */
+  height: 100vh;
+  /* Takes full height */
+  background-color: black;
+  /* Set a background color if needed */
+  z-index: -1;
+  /* Ensures it's behind all other content */
+}
