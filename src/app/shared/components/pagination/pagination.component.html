@@ -1,8 +1,8 @@
-<div class="flex justify-center space-x-2">
+<div class="mb-4 flex items-center justify-between text-white">
   <button
+    (click)="onPageChange(currentPage - 1)"
     [disabled]="currentPage === 1"
-    (click)="changePage(currentPage - 1)"
-    class="border px-4 py-2"
+    class="rounded-lg border border-white border-opacity-20 bg-black bg-opacity-50 px-4 py-2 transition duration-200 hover:bg-gray-700 disabled:opacity-50"
   >
     Previous
   </button>
@@ -10,9 +10,9 @@
   <span>Page {{ currentPage }} of {{ totalPages }}</span>
 
   <button
+    (click)="onPageChange(currentPage + 1)"
     [disabled]="currentPage === totalPages"
-    (click)="changePage(currentPage + 1)"
-    class="border px-4 py-2"
+    class="rounded-lg border border-white border-opacity-20 bg-black bg-opacity-50 px-4 py-2 transition duration-200 hover:bg-gray-700 disabled:opacity-50"
   >
     Next
   </button>

@@ -1,12 +1,38 @@
-<table class="w-full table-auto">
-  <thead>
-    <tr>
-      <th *ngFor="let header of headers" class="px-4 py-2">{{ header }}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of paginatedData">
-      <td *ngFor="let key of headers" class="border px-4 py-2">{{ item[key] }}</td>
-    </tr>
-  </tbody>
-</table>
+<div>
+  <div *ngIf="isLoading; else dataTable">
+    <app-spinner></app-spinner>
+    <!-- Show spinner when loading -->
+  </div>
+  <ng-template #dataTable>
+    <div class="relative overflow-hidden rounded-lg bg-black bg-opacity-50">
+      <table class="w-full table-auto">
+        <thead>
+          <tr>
+            <th *ngFor="let header of headers" class="bg-transparent px-4 py-2 text-white">
+              {{ header | titlecase }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngIf="data.length > 0; else noData">
+            <tr *ngFor="let item of data">
+              <td
+                *ngFor="let key of headers"
+                class="border-b border-white border-opacity-20 bg-transparent px-4 py-2 text-white hover:bg-gray-700"
+              >
+                {{ item[key] }}
+              </td>
+            </tr>
+          </ng-container>
+          <ng-template #noData>
+            <tr>
+              <td [attr.colspan]="headers.length" class="py-4 text-center text-gray-400">
+                No data available
+              </td>
+            </tr>
+          </ng-template>
+        </tbody>
+      </table>
+    </div>
+  </ng-template>
+</div>

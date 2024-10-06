@@ -1,25 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SpinnerComponent } from '../../ui/spinner/spinner.component'; // Import SpinnerComponent
 
 @Component({
   selector: 'app-table',
   standalone: true,
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    SpinnerComponent,
   ],
   templateUrl: './table.component.html',
-  styleUrl: './table.component.scss'
+  styleUrls: ['./table.component.scss']
 })
 export class TableComponent {
   @Input() data: any[] = [];
   @Input() headers: string[] = [];
   @Input() currentPage: number = 1;
   @Input() itemsPerPage: number = 10;
+  @Input() isLoading: boolean = false; // Add loading state
+  @Output() pageChange = new EventEmitter<number>();
 
   get paginatedData(): any[] {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    return this.data.slice(startIndex, startIndex + this.itemsPerPage);
+    return this.data
   }
 }

@@ -12,11 +12,26 @@ export class SwapiService {
 
   constructor(private http: HttpClient) { }
 
-  getEntities<T>(entity: string): Observable<GetResponse<T[]>> {
-    return this.http.get<GetResponse<T[]>>(`${this.apiRoot}${entity}/`);
+  getEntities<T>(entity: string, pageNumber: number, search: string): Observable<GetResponse<T[]>> {
+    const params: any = {
+      page: pageNumber
+    };
+
+    if (search) {
+      params.search = search;
+    }
+
+    const queryString = new URLSearchParams(params).toString();
+
+    return this.http.get<GetResponse<T[]>>(`${this.apiRoot}${entity}/?${queryString}`);
   }
 
-  getEntityById<T>(entity: string, id: number): Observable<T> {
-    return this.http.get<T>(`${this.apiRoot}${entity}/${id}/`);
+
+  getEntityById<T>(entity: string, id: number, pageNumber?: number): Observable<T> {
+    let page = 1
+    if (pageNumber) {
+      page = pageNumber
+    }
+    return this.http.get<T>(`${this.apiRoot}${entity}/${id}//?page=${page}`);
   }
 }
